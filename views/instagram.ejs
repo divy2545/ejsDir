@@ -1,19 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>instagram</title>
-</head>
+<%- include("includes/head.ejs") %>
 <body>
     <h1>this account belongs to @<%= username %></h1>
     <button>follow</button>
     <button>message</button>
-    <ul>
-    <% for(let follower of followers) {%>
-      <li> <%= follower %> </li>
-      <% } %>
-    </ul>
+    
+    <p>Followers:  <%=data.followers%> &nbsp; &nbsp; &nbsp; &nbsp; Following: <%=data.following%></p>
+    <hr>
+
+    <% for(let post of data.posts){ %>
+        <img src="<%=post.image%>" alt="some image">
+        <p>likes:  <%=post.likes%> &nbsp; &nbsp; &nbsp; &nbsp; comments: <%=post.comments%></p>
+        <% } %>
+
+   <%- include("includes/footer.ejs") %>
+
+    
         
 </body>
+<script src="/app.js"></script>
 </html>

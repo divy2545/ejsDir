@@ -4,6 +4,8 @@ const path= require("path");
 
 const port=8080;
 
+app.use(express.static(path.join(__dirname,"/public/css")));
+app.use(express.static(path.join(__dirname,"/public/js")));
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"/views"));
 
@@ -21,10 +23,20 @@ app.get("/rolldice",(req,res)=>{
 })
 
 app.get("/ig/:username",(req,res)=>{
+    const instaData=require("./data.json");
+    console.log(instaData  );
+    
     let {username}=req.params;
     const followers=["divyansh","atul","vijay"];
     
-    res.render("instagram.ejs",{username,followers})
+    // res.render("instagram.ejs",{username,followers});
+   const data=instaData[username];
+
+   if(data){
+    res.render("instagram.ejs",{username,data});
+   }else{
+    res.render("error.ejs")
+   }
     
 })
 
